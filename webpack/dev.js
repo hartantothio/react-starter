@@ -1,6 +1,7 @@
 const path = require('path');
 const HtmlWebPackPlugin = require('html-webpack-plugin');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
+const webpack = require('webpack');
 
 const rootPath = path.join(__dirname, '..');
 const outputPath = path.join(rootPath, 'public/dist');
@@ -50,12 +51,18 @@ module.exports = {
       }
     ]
   },
-  plugins: [new CleanWebpackPlugin([outputPath]), htmlPlugin],
+  plugins: [
+    new CleanWebpackPlugin([outputPath]),
+    new webpack.HotModuleReplacementPlugin(),
+    htmlPlugin
+  ],
   resolve: {
     extensions: ['.js', '.jsx']
   },
   devServer: {
     contentBase: outputPath,
+    historyApiFallback: true,
+    hot: true,
     port: 3001
   }
 };

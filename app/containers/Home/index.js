@@ -5,8 +5,8 @@ class App extends Component {
   render() {
     return (
       <div>
-        <p>App Container</p>
-        <Link to="/home">Home</Link>
+        <p>Home Container</p>
+        <Link to="/">App</Link>
       </div>
     );
   }

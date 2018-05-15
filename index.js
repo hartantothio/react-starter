@@ -5,7 +5,7 @@ import { Provider } from 'react-redux';
 import { ConnectedRouter } from 'react-router-redux';
 import createHistory from 'history/createBrowserHistory';
 import configureStore from './configureStore';
-import App from './app/containers/App';
+import Routes from './app/routes';
 
 // Create redux store with history
 const initialState = {};
@@ -15,7 +15,7 @@ const store = configureStore(initialState, history);
 ReactDOM.render(
   <Provider store={store}>
     <ConnectedRouter history={history}>
-      <App />
+      <Routes />
     </ConnectedRouter>
   </Provider>,
   document.getElementById('app')
