@@ -5,8 +5,9 @@
   "main": "dist/index.js",
   "license": "MIT",
   "scripts": {
-    "start": "webpack-dev-server --mode development --open --hot",
-    "build": "webpack --mode production",
+    "start":
+      "webpack-dev-server --config webpack/dev.js --mode development --open --hot",
+    "build": "webpack --config webpack/prod.js --mode production",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Hartanto Thio",
