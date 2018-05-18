@@ -4,14 +4,10 @@ const CleanWebpackPlugin = require('clean-webpack-plugin');
 
 const rootPath = path.join(__dirname, '..');
 const outputPath = path.join(rootPath, 'public/dist');
-const htmlPlugin = new HtmlWebPackPlugin({
-  template: path.join(rootPath, 'public/index.html'),
-  filename: 'index.html'
-});
 
 module.exports = {
   entry: {
-    app: path.join(rootPath, 'index.js')
+    app: path.join(rootPath, 'src/client.js')
   },
   output: {
     filename: '[name].bundle.js',
@@ -49,7 +45,13 @@ module.exports = {
       }
     ]
   },
-  plugins: [new CleanWebpackPlugin([outputPath]), htmlPlugin],
+  plugins: [
+    new CleanWebpackPlugin([outputPath]),
+    new HtmlWebPackPlugin({
+      template: path.join(rootPath, 'public/index.html'),
+      filename: 'index.html'
+    })
+  ],
   resolve: {
     extensions: ['.js', '.jsx']
   }

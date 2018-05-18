@@ -4,8 +4,8 @@ import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import { ConnectedRouter } from 'react-router-redux';
 import createHistory from 'history/createBrowserHistory';
-import configureStore from './configureStore';
-import Routes from './app/routes';
+import configureStore from './store/configure';
+import Routes from './routes';
 
 // Create redux store with history
 const initialState = {};

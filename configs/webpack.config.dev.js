@@ -5,15 +5,11 @@ const webpack = require('webpack');
 
 const rootPath = path.join(__dirname, '..');
 const outputPath = path.join(rootPath, 'public/dist');
-const htmlPlugin = new HtmlWebPackPlugin({
-  template: path.join(rootPath, 'public/index.html'),
-  filename: 'index.html'
-});
 
 module.exports = {
   devtool: 'cheap-module-eval-source-map',
   entry: {
-    app: path.join(rootPath, 'index.js')
+    app: path.join(rootPath, 'src/client.js')
   },
   output: {
     filename: '[name].bundle.js',
@@ -54,7 +50,10 @@ module.exports = {
   plugins: [
     new CleanWebpackPlugin([outputPath]),
     new webpack.HotModuleReplacementPlugin(),
-    htmlPlugin
+    new HtmlWebPackPlugin({
+      template: path.join(rootPath, 'public/index.html'),
+      filename: 'index.html'
+    })
   ],
   resolve: {
     extensions: ['.js', '.jsx']
@@ -63,6 +62,6 @@ module.exports = {
     contentBase: outputPath,
     historyApiFallback: true,
     hot: true,
-    port: 3001
+    port: 3000
   }
 };

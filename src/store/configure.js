@@ -2,7 +2,7 @@
 import { createStore, applyMiddleware, compose } from 'redux';
 import { routerMiddleware } from 'react-router-redux';
 import thunk from 'redux-thunk';
-import rootReducer from './app/reducers';
+import rootReducer from '../reducers';
 
 export default function configureStore(initialState = {}, history) {
   const enhancers = [];
@@ -20,7 +20,7 @@ export default function configureStore(initialState = {}, history) {
 
   const composedEnhancers = compose(
     applyMiddleware(...middleware),
-    ...enhancers,
+    ...enhancers
   );
 
   return createStore(rootReducer, initialState, composedEnhancers);
