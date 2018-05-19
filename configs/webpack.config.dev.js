@@ -1,32 +1,21 @@
-const path = require('path');
-const HtmlWebPackPlugin = require('html-webpack-plugin');
-const CleanWebpackPlugin = require('clean-webpack-plugin');
-const webpack = require('webpack');
+import webpack from 'webpack';
+import env from '../env';
 
-const rootPath = path.join(__dirname, '..');
-const outputPath = path.join(rootPath, 'public/dist');
+const { BUILD_PATH } = env;
 
-module.exports = {
+export default {
+  devServer: {
+    contentBase: BUILD_PATH,
+    historyApiFallback: true,
+    hot: true
+  },
+  // https://webpack.js.org/configuration/devtool/#devtool
   devtool: 'cheap-module-eval-source-map',
   entry: {
-    app: path.join(rootPath, 'src/client.js')
-  },
-  output: {
-    filename: '[name].bundle.js',
-    path: outputPath
+    app: ['react-hot-loader/patch', 'webpack-hot-middleware/client']
   },
   module: {
     rules: [
-      {
-        test: /\.(js|jsx)$/,
-        exclude: /node_modules/,
-        use: ['babel-loader']
-      },
-      {
-        test: /\.js$/,
-        exclude: /node_modules/,
-        use: ['babel-loader', 'eslint-loader']
-      },
       {
         test: /\.css$/,
         use: [
@@ -47,21 +36,8 @@ module.exports = {
       }
     ]
   },
-  plugins: [
-    new CleanWebpackPlugin([outputPath]),
-    new webpack.HotModuleReplacementPlugin(),
-    new HtmlWebPackPlugin({
-      template: path.join(rootPath, 'public/index.html'),
-      filename: 'index.html'
-    })
-  ],
-  resolve: {
-    extensions: ['.js', '.jsx']
+  output: {
+    filename: '[name].js'
   },
-  devServer: {
-    contentBase: outputPath,
-    historyApiFallback: true,
-    hot: true,
-    port: 3000
-  }
+  plugins: [new webpack.HotModuleReplacementPlugin()]
 };

@@ -1,30 +1,9 @@
-const path = require('path');
-const HtmlWebPackPlugin = require('html-webpack-plugin');
-const CleanWebpackPlugin = require('clean-webpack-plugin');
+import UglifyJsPlugin from 'uglifyjs-webpack-plugin';
 
-const rootPath = path.join(__dirname, '..');
-const outputPath = path.join(rootPath, 'public/dist');
-
-module.exports = {
-  entry: {
-    app: path.join(rootPath, 'src/client.js')
-  },
-  output: {
-    filename: '[name].bundle.js',
-    path: outputPath
-  },
+export default {
+  devtool: 'source-map',
   module: {
     rules: [
-      {
-        test: /\.(js|jsx)$/,
-        exclude: /node_modules/,
-        use: ['babel-loader']
-      },
-      {
-        test: /\.js$/,
-        exclude: /node_modules/,
-        use: ['babel-loader', 'eslint-loader']
-      },
       {
         test: /\.css$/,
         use: [
@@ -36,23 +15,31 @@ module.exports = {
             options: {
               modules: true,
               importLoaders: 1,
-              localIdentName: '[name]_[local]_[hash:base64]',
-              sourceMap: true,
-              minimize: true
+              localIdentName: '[hash:base64]',
+              sourceMap: false,
+              minimize: false
             }
           }
         ]
       }
     ]
   },
+  output: {
+    filename: '[name].[hash:8].js'
+  },
   plugins: [
-    new CleanWebpackPlugin([outputPath]),
-    new HtmlWebPackPlugin({
-      template: path.join(rootPath, 'public/index.html'),
-      filename: 'index.html'
+    new UglifyJsPlugin({
+      uglifyOptions: {
+        compress: true,
+        // dropDebugger: true,
+        // dropConsole: true,
+        mangle: true,
+        output: {
+          comments: false,
+          beautify: false
+        },
+        warnings: false
+      }
     })
-  ],
-  resolve: {
-    extensions: ['.js', '.jsx']
-  }
+  ]
 };

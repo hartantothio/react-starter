@@ -5,8 +5,10 @@ class App extends Component {
   render() {
     return (
       <div>
-        <p>Home Container</p>
-        <Link to="/">App</Link>
+        <h1>Home Container</h1>
+        <p>
+          <Link to="/">App</Link>
+        </p>
       </div>
     );
   }
