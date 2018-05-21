@@ -1,11 +1,32 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
+import PropTypes from 'prop-types';
+import { Link } from 'react-router';
+import { connect } from 'react-redux';
+
+const click = dispatch => {
+  dispatch({
+    type: 'click'
+  });
+};
 
 class App extends Component {
+  state = {
+    counter: 0
+  };
+
+  propTypes = {
+    dispatch: PropTypes.func
+  };
+
+  handleClick = () => {
+    this.setState({ counter: this.state.counter + 1 });
+    click(this.props.dispatch);
+  };
+
   render() {
     return (
       <div>
-        <h1>App Container</h1>
+        <h1 onClick={this.handleClick}>App Containers {this.state.counter}</h1>
         <p>
           <Link to="/home">Home</Link>
         </p>
@@ -14,4 +35,10 @@ class App extends Component {
   }
 }
 
-export default App;
+const mapDispatchToProps = dispatch => {
+  return {
+    dispatch
+  };
+};
+
+export default connect(null, mapDispatchToProps)(App);

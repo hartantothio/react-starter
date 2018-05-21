@@ -1,20 +1,17 @@
 /* eslint-disable no-undef */
+/* eslint-disable no-console */
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
-import { ConnectedRouter } from 'react-router-redux';
-import createHistory from 'history/createBrowserHistory';
-import configureStore from './store/configure';
-import getRoutes from './routes';
+
+import configureStore from './store';
+import createRoutes from './routes';
 
 // Create redux store with history
 const initialState = {};
-const history = createHistory();
-const store = configureStore(initialState, history);
+const store = configureStore(initialState);
 
 ReactDOM.render(
-  <Provider store={store}>
-    <ConnectedRouter history={history}>{getRoutes()}</ConnectedRouter>
-  </Provider>,
+  <Provider store={store}>{createRoutes(store)}</Provider>,
   document.getElementById('app')
 );

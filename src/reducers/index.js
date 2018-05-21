@@ -1,8 +1,14 @@
 import { combineReducers } from 'redux';
-import { routerReducer as router } from 'react-router-redux';
+import { routerReducer } from 'react-router-redux';
 
 const rootReducer = combineReducers({
-  router
+  routing: routerReducer,
+  test: function test(state = {}) {
+    return {
+      ...state,
+      click: 'click' in state ? state.click + 1 : 0
+    };
+  }
 });
 
 export default rootReducer;

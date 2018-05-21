@@ -1,25 +1,10 @@
-import path from 'path';
-import webpack from 'webpack';
-import HtmlWebPackPlugin from 'html-webpack-plugin';
-import CleanWebpackPlugin from 'clean-webpack-plugin';
 import env from '../env';
 
-const {
-  resolvePath,
-  NODE_ENV,
-  ROOT_PATH,
-  BUILD_FOLDER,
-  BUILD_PATH,
-  TEMPLATE_FILE
-} = env;
+const { NODE_ENV, BUILD_PATH } = env;
 
 export default {
   // context: ROOT_PATH,
   mode: NODE_ENV,
-
-  entry: {
-    app: [resolvePath('src/client.js')]
-  },
 
   output: {
     path: BUILD_PATH
@@ -41,15 +26,6 @@ export default {
       }
     ]
   },
-
-  plugins: [
-    new webpack.optimize.OccurrenceOrderPlugin(),
-    new CleanWebpackPlugin([BUILD_FOLDER], { root: ROOT_PATH }),
-    new HtmlWebPackPlugin({
-      template: TEMPLATE_FILE,
-      filename: path.basename(TEMPLATE_FILE)
-    })
-  ],
 
   resolve: {
     // Allow absolute paths in imports. Keep in sync with .eslintrc

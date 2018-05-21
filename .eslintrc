@@ -3,24 +3,30 @@
     browser: true,
     node: true
   },
-  extends: ["airbnb"],
+  extends: ["eslint:recommended", "plugin:react/recommended"],
+  parser: "babel-eslint",
+  plugins: ["react"],
   rules: {
-    "arrow-parens": ["error", "as-needed"],
-    "comma-dangle": ["error", "never"],
-    "consistent-return": 0,
-    "import/no-extraneous-dependencies": ["error", {"peerDependencies": false}],
-    "jsx-a11y/anchor-is-valid": 0,
-    "no-underscore-dangle": 0,
-    "react/jsx-filename-extension": 0,
-    "react/prefer-stateless-function": 0
+    strict: 1
   },
   settings: {
-    // Allow absolute paths in imports
-    // https://github.com/benmosher/eslint-plugin-import/tree/master/resolvers
+    # Allow absolute paths in imports
+    # https://github.com/benmosher/eslint-plugin-import/tree/master/resolvers
     'import/resolver': {
       node: {
         moduleDirectory: ['node_modules', 'src']
       }
     }
   }
+  # extends: ["airbnb"],
+  # rules: {
+  #   "arrow-parens": ["error", "as-needed"],
+  #   "comma-dangle": ["error", "never"],
+  #   "consistent-return": 0,
+  #   "import/no-extraneous-dependencies": ["error", {"peerDependencies": false}],
+  #   "jsx-a11y/anchor-is-valid": 0,
+  #   "no-underscore-dangle": 0,
+  #   "react/jsx-filename-extension": 0,
+  #   "react/prefer-stateless-function": 0
+  # },
 }
