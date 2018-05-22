@@ -5,9 +5,7 @@ const config = {
 
   ROOT_PATH: path.resolve(__dirname),
 
-  BUILD_FOLDER: 'public/dist',
-
-  BUILD_PATH: path.resolve(__dirname, 'public/dist'),
+  BUILD_PATH: path.resolve(__dirname, 'dist'),
 
   TEMPLATE_FILE: path.resolve(__dirname, 'public/index.html')
 };

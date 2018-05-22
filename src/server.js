@@ -32,12 +32,6 @@ if (NODE_ENV === 'development') {
   // Serve static assets from public/
   // app.use(express.static(DIST_DIR));
 
-  // Proxy to API server
-  app.use('/api', (req, res) => {
-    console.log('Serve from API');
-    res.end();
-  });
-
   app.get('*', (req, res, next) => {
     const filename = path.join(compiler.outputPath, 'index.html');
 
@@ -55,8 +49,14 @@ if (NODE_ENV === 'development') {
 } else if (NODE_ENV === 'production') {
   // For production, should only read from public/dist
   app.use(express.static(BUILD_PATH));
-  app.get('*', (req, res) => res.sendFile(BUILD_FILE));
+  // app.get('*', (req, res) => res.sendFile(BUILD_FILE));
 }
+
+// Proxy to API server
+app.use('/api', (req, res) => {
+  console.log('Serve from API');
+  res.end();
+});
 
 app.listen(3000, err => {
   if (err) {

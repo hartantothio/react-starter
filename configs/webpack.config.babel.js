@@ -5,15 +5,6 @@ import prod from './webpack.config.prod';
 import env from '../env';
 
 const { NODE_ENV } = env;
-let config;
-
-switch (NODE_ENV) {
-  case 'production':
-    config = prod;
-    break;
-
-  default:
-    config = dev;
-}
+const config = NODE_ENV === 'production' ? prod : dev;
 
 export default merge(base, config);

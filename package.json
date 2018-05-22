@@ -8,7 +8,7 @@
     "lint": "./node_modules/.bin/eslint --ext .js,.jsx --ignore-path .gitignore .",
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "babel-node ./src/server.js",
-    "build:prod": "NODE_ENV=production webpack --config configs/webpack.config.babel.js",
+    "build:prod": "NODE_ENV=production webpack --config ./configs/webpack.config.babel.js",
     "start:prod": "NODE_ENV=production babel-node ./src/server.js",
     "prod": "npm-run-all build:prod start:prod"
   },

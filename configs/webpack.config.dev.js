@@ -1,16 +1,13 @@
 import path from 'path';
 import webpack from 'webpack';
-import HtmlWebPackPlugin from 'html-webpack-plugin';
+import HtmlWebpackPlugin from 'html-webpack-plugin';
 import env from '../env';
 
-const { resolvePath, TEMPLATE_FILE } = env;
+const { TEMPLATE_FILE } = env;
 
 export default {
   // https://webpack.js.org/configuration/devtool/#devtool
   devtool: 'cheap-module-eval-source-map',
-  entry: {
-    app: [resolvePath('src/client.js')]
-  },
   module: {
     rules: [
       {
@@ -38,7 +35,7 @@ export default {
   },
   plugins: [
     new webpack.optimize.OccurrenceOrderPlugin(),
-    new HtmlWebPackPlugin({
+    new HtmlWebpackPlugin({
       template: TEMPLATE_FILE,
       filename: path.basename(TEMPLATE_FILE)
     })
