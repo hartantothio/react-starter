@@ -2,13 +2,18 @@ import path from 'path';
 import webpack from 'webpack';
 import HtmlWebpackPlugin from 'html-webpack-plugin';
 import CleanWebpackPlugin from 'clean-webpack-plugin';
-import UglifyJsPlugin from 'uglifyjs-webpack-plugin';
+import UglifyJsWebpackPlugin from 'uglifyjs-webpack-plugin';
 import env from '../env';
 
-const { ROOT_PATH, BUILD_PATH, TEMPLATE_FILE } = env;
+const { resolvePath, ROOT_PATH, BUILD_PATH, TEMPLATE_FILE } = env;
 
 export default {
   devtool: 'source-map',
+
+  entry: {
+    app: [resolvePath('src/client.js')]
+  },
+
   module: {
     rules: [
       {
@@ -31,9 +36,11 @@ export default {
       }
     ]
   },
+
   output: {
     filename: 'js/[name].[hash:8].js'
   },
+
   plugins: [
     new webpack.optimize.OccurrenceOrderPlugin(),
     new CleanWebpackPlugin([path.basename(BUILD_PATH)], { root: ROOT_PATH }),
@@ -41,7 +48,7 @@ export default {
       template: TEMPLATE_FILE,
       filename: path.basename(TEMPLATE_FILE)
     }),
-    new UglifyJsPlugin({
+    new UglifyJsWebpackPlugin({
       uglifyOptions: {
         compress: true,
         // dropDebugger: true,

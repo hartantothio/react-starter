@@ -5,11 +5,13 @@ import compression from 'compression';
 import webpack from 'webpack';
 import webpackDevMiddleware from 'webpack-dev-middleware';
 import webpackHotMiddleware from 'webpack-hot-middleware';
+import errorOverlayMiddleware from 'react-dev-utils/errorOverlayMiddleware';
+import openBrowser from 'react-dev-utils/openBrowser';
 import webpackHotClient from 'webpack-hot-client';
-import webpackConfig from '../configs/webpack.config.babel';
-import env from '../env';
+import webpackConfig from './configs/webpack.config.babel';
+import env from './env';
 
-const { NODE_ENV, BUILD_PATH, BUILD_FILE } = env;
+const { NODE_ENV, BUILD_PATH } = env;
 
 const app = express();
 
@@ -18,6 +20,7 @@ app.use(compression());
 
 // Only for development
 if (NODE_ENV === 'development') {
+  app.use(errorOverlayMiddleware());
   const compiler = webpack(webpackConfig);
 
   webpackHotClient(compiler);
@@ -62,6 +65,9 @@ app.listen(3000, err => {
   if (err) {
     console.error(err);
   } else {
+    if (openBrowser('http://localhost:3000')) {
+      console.info('The browser tab has been opened');
+    }
     console.info('Example app listening on port 8080!');
   }
 });

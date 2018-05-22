@@ -1,18 +1,18 @@
 import env from '../env';
 
-const { resolvePath, NODE_ENV, BUILD_PATH } = env;
+const { NODE_ENV, BUILD_PATH } = env;
 
 export default {
   // context: ROOT_PATH,
   mode: NODE_ENV,
 
-  entry: {
-    app: [resolvePath('src/client.js')]
-  },
-
   output: {
     path: BUILD_PATH,
     publicPath: '/'
+  },
+
+  optimization: {
+    noEmitOnErrors: true
   },
 
   module: {

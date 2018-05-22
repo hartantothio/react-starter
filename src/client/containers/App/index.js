@@ -26,7 +26,7 @@ class App extends Component {
   render() {
     return (
       <div>
-        <h1 onClick={this.handleClick}>App Containers {this.state.counter}</h1>
+        <h1 onClick={this.handleClick}>App Container {this.state.counter}</h1>
         <p>
           <Link to="/home">Home</Link>
         </p>

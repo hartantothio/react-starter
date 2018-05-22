@@ -3,11 +3,19 @@ import webpack from 'webpack';
 import HtmlWebpackPlugin from 'html-webpack-plugin';
 import env from '../env';
 
-const { TEMPLATE_FILE } = env;
+const { resolvePath, TEMPLATE_FILE } = env;
 
 export default {
   // https://webpack.js.org/configuration/devtool/#devtool
   devtool: 'cheap-module-eval-source-map',
+
+  entry: {
+    app: [
+      resolvePath('src/client/webpackHotDevClient.js'),
+      resolvePath('src/client/index.js')
+    ]
+  },
+
   module: {
     rules: [
       {
@@ -30,9 +38,11 @@ export default {
       }
     ]
   },
+
   output: {
     filename: '[name].js'
   },
+
   plugins: [
     new webpack.optimize.OccurrenceOrderPlugin(),
     new HtmlWebpackPlugin({
