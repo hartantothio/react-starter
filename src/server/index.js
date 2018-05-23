@@ -57,7 +57,7 @@ if (NODE_ENV === 'development') {
 
 // Proxy to API server
 app.use('/api', (req, res) => {
-  console.log('Serve from API');
+  console.info('Serve from API');
   res.end();
 });
 

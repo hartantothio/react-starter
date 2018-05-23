@@ -16,10 +16,12 @@
   "dependencies": {
     "compression": "^1.7.2",
     "express": "^4.16.3",
+    "final-form": "^4.6.1",
     "history": "^4.7.2",
     "prop-types": "^15.6.1",
     "react": "^16.3.2",
     "react-dom": "^16.3.2",
+    "react-final-form": "^3.4.2",
     "react-redux": "^5.0.7",
     "react-router": "^3.2.1",
     "react-router-redux": "^4.0.8",
