@@ -7,7 +7,6 @@ import webpackDevMiddleware from 'webpack-dev-middleware';
 import webpackHotMiddleware from 'webpack-hot-middleware';
 import errorOverlayMiddleware from 'react-dev-utils/errorOverlayMiddleware';
 import openBrowser from 'react-dev-utils/openBrowser';
-import webpackHotClient from 'webpack-hot-client';
 import webpackConfig from './configs/webpack.config.babel';
 import env from './env';
 
@@ -22,8 +21,6 @@ app.use(compression());
 if (NODE_ENV === 'development') {
   app.use(errorOverlayMiddleware());
   const compiler = webpack(webpackConfig);
-
-  webpackHotClient(compiler);
 
   app.use(
     webpackDevMiddleware(compiler, {

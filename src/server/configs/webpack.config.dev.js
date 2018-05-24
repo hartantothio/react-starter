@@ -44,7 +44,7 @@ export default {
   },
 
   plugins: [
-    new webpack.optimize.OccurrenceOrderPlugin(),
+    new webpack.HotModuleReplacementPlugin(),
     new HtmlWebpackPlugin({
       template: TEMPLATE_FILE,
       filename: path.basename(TEMPLATE_FILE)
