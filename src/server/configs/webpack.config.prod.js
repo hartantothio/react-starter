@@ -42,7 +42,6 @@ export default {
   },
 
   plugins: [
-    new webpack.optimize.OccurrenceOrderPlugin(),
     new CleanWebpackPlugin([path.basename(BUILD_PATH)], { root: ROOT_PATH }),
     new HtmlWebpackPlugin({
       template: TEMPLATE_FILE,

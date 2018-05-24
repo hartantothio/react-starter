@@ -10,12 +10,13 @@ const click = dispatch => {
 };
 
 class App extends Component {
-  state = {
-    counter: 0
+  static propTypes = {
+    children: PropTypes.any,
+    dispatch: PropTypes.func
   };
 
-  propTypes = {
-    dispatch: PropTypes.func
+  state = {
+    counter: 0
   };
 
   handleClick = () => {
@@ -30,6 +31,7 @@ class App extends Component {
         <p>
           <Link to="/home">Home</Link>
         </p>
+        {this.props.children}
       </div>
     );
   }
