@@ -14,11 +14,16 @@ class Form extends Component {
 
   static defaultProps = {};
 
+  handleSubmit = () => {
+    console.log('Form submitted');
+    console.log(this.props);
+  };
+
   render() {
     const { children, ...restProps } = this.props;
 
     return (
-      <ReactFinalForm {...restProps}>
+      <ReactFinalForm {...restProps} onSubmit={this.handleSubmit}>
         {formRenderProps => {
           const { handleSubmit } = formRenderProps;
 

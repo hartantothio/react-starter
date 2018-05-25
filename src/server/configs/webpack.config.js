@@ -11,10 +11,6 @@ export default {
     publicPath: '/'
   },
 
-  optimization: {
-    noEmitOnErrors: true
-  },
-
   module: {
     // makes missing exports an error instead of warning
     strictExportPresence: true,
@@ -34,7 +30,7 @@ export default {
 
   resolve: {
     // Allow absolute paths in imports. Keep in sync with .eslintrc
-    modules: ['node_modules', 'src']
-    // extensions: ['.js', '.jsx']
+    modules: ['node_modules', 'src/client'],
+    extensions: ['.js', '.jsx']
   }
 };

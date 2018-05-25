@@ -1,8 +1,8 @@
 import React from 'react';
 import { Route } from 'react-router';
-import App from '../containers/App';
-import Home from '../containers/Home';
-import Form from '../containers/Form';
+import App from 'containers/App';
+import Home from 'containers/Home';
+import Form from 'containers/Form';
 
 const routes = (
   <Route path="/" component={App}>

@@ -1,12 +1,12 @@
 /* eslint-disable */
 import React, { Component } from 'react';
-import Field from '../../components/Field';
-import Form from '../../components/Form';
-import { compose, required, min, max } from '../../utils/validation';
+import Field from 'components/Field';
+import Form from 'components/Form';
+import { compose, required, min, max } from 'utils/validator';
 
 class FormPage extends Component {
   handleSubmit = () => {
-    console.log('Form submitted');
+    console.log('FormPage submitted');
   };
 
   render() {

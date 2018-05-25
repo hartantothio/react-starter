@@ -3,7 +3,13 @@
   "version": "0.1.0",
   "description": "",
   "main": "public/dist/index.js",
+  "author": "Hartanto Thio",
   "license": "MIT",
+  "moduleRoots": [
+    "./",
+    "node_modules",
+    "src/client"
+  ],
   "scripts": {
     "lint": "./node_modules/.bin/eslint --ext .js,.jsx --ignore-path .gitignore .",
     "test": "echo \"Error: no test specified\" && exit 1",
@@ -12,7 +18,6 @@
     "start:prod": "NODE_ENV=production babel-node ./src/server/index.js",
     "prod": "npm-run-all build:prod start:prod"
   },
-  "author": "Hartanto Thio",
   "dependencies": {
     "compression": "^1.7.2",
     "express": "^4.16.3",
