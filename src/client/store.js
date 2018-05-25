@@ -1,4 +1,3 @@
-/* eslint-disable no-undef */
 import { createStore, applyMiddleware, compose } from 'redux';
 import thunk from 'redux-thunk';
 import reducers from './reducers';

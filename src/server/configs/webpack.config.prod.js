@@ -1,5 +1,4 @@
 import path from 'path';
-import webpack from 'webpack';
 import HtmlWebpackPlugin from 'html-webpack-plugin';
 import CleanWebpackPlugin from 'clean-webpack-plugin';
 import UglifyJsWebpackPlugin from 'uglifyjs-webpack-plugin';
@@ -12,6 +11,10 @@ export default {
 
   entry: {
     app: [resolvePath('src/client.js')]
+  },
+
+  optimization: {
+    noEmitOnErrors: true
   },
 
   module: {

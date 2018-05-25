@@ -34,7 +34,7 @@ export default {
 
   resolve: {
     // Allow absolute paths in imports. Keep in sync with .eslintrc
-    modules: ['node_modules', 'src']
-    // extensions: ['.js', '.jsx']
+    modules: ['node_modules', 'src/client'],
+    extensions: ['.js', '.jsx']
   }
 };
