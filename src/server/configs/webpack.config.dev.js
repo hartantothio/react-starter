@@ -19,7 +19,25 @@ export default {
   module: {
     rules: [
       {
+        test: /\.(js|jsx)$/,
+        exclude: [/node_modules/],
+        use: ['babel-loader']
+      },
+      {
+        test: /\.js$/,
+        exclude: [/node_modules/],
+        use: [
+          {
+            loader: 'eslint-loader',
+            options: {
+              emitWarning: true
+            }
+          }
+        ]
+      },
+      {
         test: /\.css$/,
+        exclude: [/node_modules/],
         use: [
           {
             loader: 'style-loader'
@@ -29,18 +47,12 @@ export default {
             options: {
               modules: true,
               importLoaders: 1,
-              localIdentName: '[name]_[local]_[hash:base64]',
-              sourceMap: true,
-              minimize: true
+              localIdentName: '[name]_[local]_[hash:base64]'
             }
           }
         ]
       }
     ]
-  },
-
-  output: {
-    filename: '[name].js'
   },
 
   plugins: [

@@ -1,38 +1,56 @@
 import path from 'path';
 import HtmlWebpackPlugin from 'html-webpack-plugin';
 import CleanWebpackPlugin from 'clean-webpack-plugin';
+import MiniCssExtractPlugin from 'mini-css-extract-plugin';
+import OptimizeCssAssetsWebpackPlugins from 'optimize-css-assets-webpack-plugin';
 import UglifyJsWebpackPlugin from 'uglifyjs-webpack-plugin';
 import env from '../env';
 
-const { resolvePath, ROOT_PATH, BUILD_PATH, TEMPLATE_FILE } = env;
+const { resolvePath, TEMPLATE_FILE, BUILD_PATH, ROOT_PATH } = env;
 
 export default {
   devtool: 'source-map',
 
   entry: {
-    app: [resolvePath('src/client.js')]
+    app: [resolvePath('src/client/index.js')]
   },
 
-  optimization: {
-    noEmitOnErrors: true
+  output: {
+    filename: 'js/[name].[hash:8].js'
   },
 
   module: {
     rules: [
       {
-        test: /\.css$/,
+        test: /\.(js|jsx)$/,
+        exclude: [/node_modules/],
+        use: ['babel-loader']
+      },
+      {
+        test: /\.js$/,
+        exclude: [/node_modules/],
         use: [
           {
-            loader: 'style-loader'
+            loader: 'eslint-loader',
+            options: {
+              emitWarning: true
+            }
+          }
+        ]
+      },
+      {
+        test: /\.css$/,
+        exclude: [/node_modules/],
+        use: [
+          {
+            loader: MiniCssExtractPlugin.loader
           },
           {
             loader: 'css-loader',
             options: {
               modules: true,
               importLoaders: 1,
-              localIdentName: '[hash:base64]',
-              sourceMap: false,
-              minimize: false
+              localIdentName: '[hash:base64:5]'
             }
           }
         ]
@@ -40,12 +58,25 @@ export default {
     ]
   },
 
-  output: {
-    filename: 'js/[name].[hash:8].js'
+  optimization: {
+    noEmitOnErrors: true,
+    minimizer: [
+      new UglifyJsWebpackPlugin({
+        cache: true,
+        parallel: true,
+        sourceMap: true
+      }),
+      new OptimizeCssAssetsWebpackPlugins()
+    ]
   },
 
   plugins: [
     new CleanWebpackPlugin([path.basename(BUILD_PATH)], { root: ROOT_PATH }),
+    new MiniCssExtractPlugin({
+      filename: 'css/[name].[hash:8].css',
+      chunkFilename: 'css/[id].[hash:8].css',
+      path: '/'
+    }),
     new HtmlWebpackPlugin({
       template: TEMPLATE_FILE,
       filename: path.basename(TEMPLATE_FILE)
